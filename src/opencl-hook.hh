@@ -15,7 +15,12 @@
 
 #include "init.hh"
 #include "common.hh"
+#ifdef __APPLE__
+#include <OpenCL/opencl.h>
+#else
 #include <CL/cl.h>
+#endif
+#include <stdio.h>
 #include <stdio.h>
 
 

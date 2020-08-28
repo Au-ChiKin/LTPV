@@ -25,9 +25,10 @@ def bld_command(*k):
 		fun = name
 	return fun
 
-
 cflags = ['-std=c99']
+
 cxxflags = ['-std=c++11']
+
 warningflags = ['-W', '-Wall', '-Wextra','-Wno-write-strings', '-Wno-mismatched-tags', '-Wunused']
 
 modeflags = {
@@ -35,6 +36,10 @@ modeflags = {
     'debug-opti': ['-O2', '-g', '-ggdb'],
     'debug': ['-O0',  '-g', '-ggdb'],
     }
+
+if sys.platform == 'darwin':
+    cflags.append('-framework OpenCL')
+    frameworks = ['OpenCL']
 
 from waflib import Build    
 class doc(Build.BuildContext):
@@ -92,7 +97,7 @@ def configure(conf):
 
     conf.env.append_unique('CFLAGS', cflags)
     conf.env.append_unique('CXXFLAGS', cxxflags)
-
+    conf.env.append_unique('FRAMEWORK', frameworks)
 
     conf.check(
             uselib_store='dl',

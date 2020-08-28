@@ -1,5 +1,10 @@
 #pragma once
+#ifdef __APPLE__
+#include <OpenCL/opencl.h>
+#else
 #include <CL/cl.h>
+#endif
+#include <stdio.h>
 
 #define LTPV_OPENCL_UINT            1
 #define LTPV_OPENCL_BOOL            2
